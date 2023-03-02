@@ -7,7 +7,7 @@
 
 2) run this in terminal anf fill the required info :
 
-        wget https://raw.githubusercontent.com/daboynb/systemd-ngrok/master/install.sh && chmod +x install.sh && ./install.sh
+        wget https://raw.githubusercontent.com/daboynb/ngrok_telegram_Bot/main/install.sh && chmod +x install.sh && ./install.sh
 
 
 # Uninstall
