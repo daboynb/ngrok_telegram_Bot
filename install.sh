@@ -88,6 +88,21 @@ echo 'public_url=$(curl -s http://localhost:4040/api/tunnels | jq -r ".tunnels[]
 echo "API_TOKEN=\"${bot_api}\"" | sudo tee -a /opt/bot/bot.sh
 echo "CHAT_ID=\"-${chat_id}\"" | sudo tee -a /opt/bot/bot.sh
 echo 'curl -s -X POST https://api.telegram.org/bot$API_TOKEN/sendMessage -d chat_id=$CHAT_ID -d text="$public_url"' | sudo tee -a /opt/bot/bot.sh
+echo 'while true' | sudo tee -a /opt/bot/bot.sh
+echo 'do' | sudo tee -a /opt/bot/bot.sh
+echo 'if ping -c 1 google.com &> /dev/null' | sudo tee -a /opt/bot/bot.sh
+echo 'then' | sudo tee -a /opt/bot/bot.sh
+echo 'if ! $online' | sudo tee -a /opt/bot/bot.sh
+echo 'then' | sudo tee -a /opt/bot/bot.sh
+echo 'echo "Network is back online, executing command"' | sudo tee -a /opt/bot/bot.sh
+echo 'curl -s -X POST https://api.telegram.org/bot$API_TOKEN/sendMessage -d chat_id=$CHAT_ID -d text="$public_url"' | sudo tee -a /opt/bot/bot.sh
+echo 'online=true' | sudo tee -a /opt/bot/bot.sh
+echo 'fi' | sudo tee -a /opt/bot/bot.sh
+echo 'else' | sudo tee -a /opt/bot/bot.sh
+echo 'online=false' | sudo tee -a /opt/bot/bot.sh
+echo 'fi' | sudo tee -a /opt/bot/bot.sh
+echo 'sleep 5' | sudo tee -a /opt/bot/bot.sh
+echo 'done' | sudo tee -a /opt/bot/bot.sh
 
 sudo chmod +x /opt/bot/bot.sh
 
