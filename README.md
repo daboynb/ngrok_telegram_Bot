@@ -6,29 +6,27 @@ Script that uses the Telegram Bot API to send your ngrok server address when it 
 
 # Installation 
 
-1) create a Telegram bot with botfather and save the HTTP API
+1) Create an Ngrok account at https://dashboard.ngrok.com/ and save the auth token.
 
-2) create a group and add the bot to the channel, then make it an admin
+2) Create a Telegram bot with BotFather and save the HTTP API.
 
-3) open botfather, type /setjoingroups and set to disable
+3) Create a group, add the bot to the channel, and make it an admin.
 
-3) extract the chat id of the group , type in the search bar of your browser :
-        https://api.telegram.org/bot"yourapi"/getUpdates
+4) Open BotFather, type /setjoingroups, and set it to disable.
+
+5) To get the chat ID of the group, type the following in the search bar of your browser:
+
+        https://api.telegram.org/botyourapi/getUpdates
         
-        the result will be something like that
+   The result will be something like this:
 
-        "my_chat_member":{"chat":{"id":-99999999,"title":"raspberry pi","type":"group" "all_members_are_administrators":true},
+        "my_chat_member":{"chat":{"id":-99999999,"title":"raspberry pi","type":"group" "all_members_are_administrators":true}
 
-        where the id is 99999999
+   look at the output, the group name is "raspberry pi" and the chat ID is "99999999".
 
-save the chat ID and API following this awesome guide : https://sarafian.github.io/low-code/2020/03/24/create-private-telegram-chatbot.html
-
-
-
-4) run this in terminal anf fill the required info :
+6) Now that you have all the required info, run this in the terminal and fill in the required fields:
 
         wget https://raw.githubusercontent.com/daboynb/ngrok_telegram_Bot/main/install.sh && chmod +x install.sh && ./install.sh
-
 
 # Uninstall
 
