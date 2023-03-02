@@ -67,7 +67,6 @@ EOF
 
 create_ngrok_service
 
-
 # Enable the service at startup and start it
 systemctl enable ngrok.service
 systemctl start ngrok.service
