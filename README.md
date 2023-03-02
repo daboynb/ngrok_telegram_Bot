@@ -22,7 +22,7 @@ To uninstall ngrok systemd :
     sudo rm /lib/systemd/system/ngrok.service
     sudo rm -rf /opt/ngrok
 
-To uninstall the telegram bot :
+To uninstall the script that uses the Telegram Bot API  :
 
     sudo systemctl stop bot.service
     sudo systemctl disable bot.service
