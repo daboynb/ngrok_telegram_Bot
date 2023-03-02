@@ -3,11 +3,11 @@
 
 # Installation 
 
-    - create a Telegram bot and save the chat ID and API; an awesome guide can be found here: https://sarafian.github.io/low-code/2020/03/24/create-private-telegram-chatbot.html
+1) create a Telegram bot and save the chat ID and API; an awesome guide can be found here: https://sarafian.github.io/low-code/2020/03/24/create-private-telegram-chatbot.html
 
-run this in terminal anf fill the required info:
+2) run this in terminal anf fill the required info :
 
-    wget https://raw.githubusercontent.com/daboynb/systemd-ngrok/master/install.sh && chmod +x install.sh && ./install.sh
+        wget https://raw.githubusercontent.com/daboynb/systemd-ngrok/master/install.sh && chmod +x install.sh && ./install.sh
 
 
 # Uninstall
@@ -23,5 +23,7 @@ To uninstall the telegram bot :
 
     sudo systemctl stop bot.service
     sudo systemctl disable bot.service
-    sudo rm /opt/bot/bot.sh
     sudo rm /lib/systemd/system/bot.service
+    sudo rm -ft /opt/bot
+    
+Systemd ngrok based on https://github.com/vincenthsu/systemd-ngrok
