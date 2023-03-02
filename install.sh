@@ -32,7 +32,7 @@ chmod +x ngrok
 # Create the YML file
 read -p "Insert yout your_authtoken : " auth_token
 
-create_yaml_file() {
+create_yml_file() {
     echo "version: \"2\"
 authtoken: $auth_token
 tunnels:
@@ -41,7 +41,7 @@ tunnels:
         addr: 22" >  /opt/ngrok/ngrok.yml
 }
 
-create_yaml_file
+create_yml_file
 
 # Create the ngrok service file
 SERVICE_FILE="/lib/systemd/system/ngrok.service"
