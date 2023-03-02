@@ -1,3 +1,6 @@
+# What is it?
+Script that uses the Telegram Bot API to send your ngrok server address when it boots or when the internet returns after an outage
+
 # Photo
 ![Capture](https://user-images.githubusercontent.com/106079917/222291178-04a6feef-17b6-44f2-bb74-4c11d758f50c.PNG)
 
@@ -36,7 +39,7 @@ To uninstall ngrok systemd :
     sudo rm /lib/systemd/system/ngrok.service
     sudo rm -rf /opt/ngrok
 
-To uninstall the telegram bot :
+To uninstall the script that uses the Telegram Bot API  :
 
     sudo systemctl stop bot.service
     sudo systemctl disable bot.service
