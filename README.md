@@ -24,6 +24,6 @@ To uninstall the telegram bot :
     sudo systemctl stop bot.service
     sudo systemctl disable bot.service
     sudo rm /lib/systemd/system/bot.service
-    sudo rm -ft /opt/bot
+    sudo rm -rf /opt/bot
     
 Systemd ngrok based on https://github.com/vincenthsu/systemd-ngrok
