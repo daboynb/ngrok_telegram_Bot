@@ -1,5 +1,9 @@
 # What is it?
-Script that uses the Telegram Bot API to send your ngrok server address when it boots or when the internet returns after an outage
+ This script does two things:
+
+1) Installs ngrok and starts it automatically at boot using systemd.
+
+2) Creates a bash script that sends you the updated address of your Raspberry Pi on Ngrok via Telegram every time the Raspberry Pi starts up or after an internet interruption.
 
 # Photo
 ![Capture](https://user-images.githubusercontent.com/106079917/222291178-04a6feef-17b6-44f2-bb74-4c11d758f50c.PNG)
