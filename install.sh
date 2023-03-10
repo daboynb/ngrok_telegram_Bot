@@ -76,32 +76,44 @@ systemctl start ngrok.service
 # Create the folder
 mkdir -p /opt/bot
 
+SCRIPT_FILE=" /opt/bot/bot.sh"
+
 # Ask for bot settings
 read -p "Insert your telegram bot api : " bot_api
 read -p "Insert the chat id  : " chat_id
 
-# Create the bot.sh file
-echo '#!/bin/bash' | sudo tee -a /opt/bot/bot.sh
-echo 'sleep 30' | sudo tee -a /opt/bot/bot.sh
-echo 'public_url=$(curl -s http://localhost:4040/api/tunnels | jq -r ".tunnels[].public_url")' | sudo tee -a /opt/bot/bot.sh
-echo "API_TOKEN=\"${bot_api}\"" | sudo tee -a /opt/bot/bot.sh
-echo "CHAT_ID=\"-${chat_id}\"" | sudo tee -a /opt/bot/bot.sh
-echo 'curl -s -X POST https://api.telegram.org/bot$API_TOKEN/sendMessage -d chat_id=$CHAT_ID -d text="$public_url"' | sudo tee -a /opt/bot/bot.sh
-echo 'while true' | sudo tee -a /opt/bot/bot.sh
-echo 'do' | sudo tee -a /opt/bot/bot.sh
-echo 'if ping -c 1 google.com &> /dev/null' | sudo tee -a /opt/bot/bot.sh
-echo 'then' | sudo tee -a /opt/bot/bot.sh
-echo 'if ! $online' | sudo tee -a /opt/bot/bot.sh
-echo 'then' | sudo tee -a /opt/bot/bot.sh
-echo 'echo "Network is back online, executing command"' | sudo tee -a /opt/bot/bot.sh
-echo 'curl -s -X POST https://api.telegram.org/bot$API_TOKEN/sendMessage -d chat_id=$CHAT_ID -d text="$public_url"' | sudo tee -a /opt/bot/bot.sh
-echo 'online=true' | sudo tee -a /opt/bot/bot.sh
-echo 'fi' | sudo tee -a /opt/bot/bot.sh
-echo 'else' | sudo tee -a /opt/bot/bot.sh
-echo 'online=false' | sudo tee -a /opt/bot/bot.sh
-echo 'fi' | sudo tee -a /opt/bot/bot.sh
-echo 'sleep 5' | sudo tee -a /opt/bot/bot.sh
-echo 'done' | sudo tee -a /opt/bot/bot.sh
+# Create a script that sends the address
+create_script_file() {
+cat << EOF > ${SCRIPT_FILE}
+#!/bin/bash
+
+sleep 30
+
+public_url=\$(curl -s http://localhost:4040/api/tunnels | jq -r ".tunnels[].public_url")
+API_TOKEN="${bot_api}"
+CHAT_ID="-${chat_id}"
+
+curl -s -X POST https://api.telegram.org/bot\$API_TOKEN/sendMessage -d chat_id=\$CHAT_ID -d text="\$public_url"
+
+while true
+do
+    if ping -c 1 google.com &> /dev/null
+    then
+        if ! \$online
+        then
+            echo "Network is back online, executing command"
+            curl -s -X POST https://api.telegram.org/bot\$API_TOKEN/sendMessage -d chat_id=\$CHAT_ID -d text="\$public_url"
+            online=true
+        fi
+    else
+        online=false
+    fi
+    sleep 5
+done
+EOF
+}
+
+create_script_file
 
 sudo chmod +x /opt/bot/bot.sh
 
